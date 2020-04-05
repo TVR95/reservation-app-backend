@@ -15,7 +15,7 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -30,21 +30,21 @@ public class User {
     private Date createdAt;
 
     @NotBlank
-    @Column(name = "password")
+    @Column(name = "user_password")
     @Size(min = 5)
     private String password;
 
-    public User() {
-        super();
-    }
-
-    public User(Long id, String username, Date createdAt, String password) {
-        super();
-        this.id = id;
-        this.username = username;
-        this.createdAt = createdAt;
-        this.password = password;
-    }
+//    public User() {
+////        super();
+////    }
+////
+////    public User(Long id, String username, Date createdAt, String password) {
+////        super();
+////        this.id = id;
+////        this.username = username;
+////        this.createdAt = createdAt;
+////        this.password = password;
+////    }
 
     public Long getId() {
         return id;

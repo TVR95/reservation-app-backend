@@ -17,26 +17,26 @@ public class UserController {
     UserRepository userRepository;
 
     // Get all users
-    @GetMapping("/users")
+    @GetMapping(path = "/users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     // Create a new user
-    @PostMapping("/users")
-    public User createUser(@Valid @RequestBody User user) {
+    @PostMapping(path = "/users")
+    public User createUser(@RequestParam User user) {
         return userRepository.save(user);
     }
 
     // Get a single user
-    @GetMapping("/users/{id}")
+    @GetMapping(path = "/users/{id}")
     public User getUserById(@PathVariable(value="id") Long userId) throws UserNotFoundException {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     // Update an user
-    @PutMapping("/users/{id}")
+    @PutMapping(path = "/users/{id}")
     public User updateUser(@PathVariable(value = "id") Long userId,
                            @Valid @RequestBody User userDetails) throws UserNotFoundException {
         User user = userRepository.findById(userId)
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     // Delete an user
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping(path = "/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "id") Long userId) throws UserNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));

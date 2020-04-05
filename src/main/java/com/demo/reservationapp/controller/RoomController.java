@@ -16,23 +16,23 @@ public class RoomController {
     @Autowired
     RoomRepository roomRepository;
 
-    @GetMapping("/rooms")
+    @GetMapping(path = "/rooms")
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
 
-    @PostMapping("/rooms")
+    @PostMapping(path = "/rooms")
     public Room createRoom(@Valid @RequestBody Room room) {
         return roomRepository.save(room);
     }
 
-    @GetMapping("/rooms/{id}")
+    @GetMapping(path = "/rooms/{id}")
     public Room getRoomById(@PathVariable(value = "id") Long roomId) throws RoomNotFoundException {
         return roomRepository.findById(roomId)
                 .orElseThrow(() -> new RoomNotFoundException(roomId));
     }
 
-    @PutMapping("/rooms/{id}")
+    @PutMapping(path = "/rooms/{id}")
     public Room updateRoom(@PathVariable(value = "id") Long roomId,
                            @Valid @RequestBody Room roomDetails) throws RoomNotFoundException {
         Room room = roomRepository.findById(roomId)
@@ -52,7 +52,7 @@ public class RoomController {
         return updatedRoom;
     }
 
-    @DeleteMapping("/rooms/{id}")
+    @DeleteMapping(path = "/rooms/{id}")
     public ResponseEntity<?> deleteRoom(@PathVariable(value = "id") Long roomId) throws RoomNotFoundException {
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RoomNotFoundException(roomId));
